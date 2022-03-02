@@ -17,7 +17,7 @@ class ShopList extends HTMLElement {
     async loadShopPage() {
         let productThumbTemplate = await this.loadProductThumb();
         this.#products = await this.getProductData();
-        this.#productSizes = await this.getProductSizesData();
+//        this.#productSizes = await this.getProductSizesData();
         console.log(this);
         this.renderProductData(productThumbTemplate);
     }
