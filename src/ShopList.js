@@ -7,7 +7,7 @@ class ShopList extends HTMLElement {
 
     async loadProductThumb() {
         let thumbContainer = document.createElement("div");
-        let thumbHtml = await fetch("./pages/fragments/productThumb.html");
+        let thumbHtml = await fetch("/pages/fragments/productThumb.html");
         thumbContainer.innerHTML = await thumbHtml.text();
         return thumbContainer;
     }
@@ -18,7 +18,7 @@ class ShopList extends HTMLElement {
     }
 
     renderProductData(productData, productThumbTemplate) {
-        for (product of productData) {
+        for (let product of productData) {
             let thumb = productThumbTemplate.cloneNode(true);
             thumb.querySelector(`[boundField="Name"]`).innerText = product.Name;
             this.appendChild(thumb);
