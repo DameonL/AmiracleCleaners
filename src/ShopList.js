@@ -25,7 +25,7 @@ class ShopList extends HTMLElement {
         }
     }
     
-    let getProductData = async () => {
+    async getProductData() {
         let data = await fetch("https://amiracleproducts-c9c9.restdb.io/rest/products", {
             headers: new Headers({
                     'x-apikey': '621ea73934fd621565858acc', 
