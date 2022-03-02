@@ -22,7 +22,14 @@ class ShopList extends HTMLElement {
             let thumb = productThumbTemplate.cloneNode(true);
             thumb.querySelector(`[boundField="Name"]`).innerText = product.Name;
             let productImageElement = thumb.querySelector(`[boundField="Image"]`);
-            let response = await fetch(`https://amiracleproducts-c9c9.restdb.io/media/${product.Image}?s=t`);
+            let response = await fetch(`https://amiracleproducts-c9c9.restdb.io/media/${product.Image}?s=t`, {
+                headers: new Headers({
+                    'x-apikey': '621ea73934fd621565858acc', 
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    "Access-Control-Allow-Origin": "*"
+                }),
+                mode: "no-cors"
+            });
             let productImageBlob = await response.blob();
             productImageElement.src = URL.createObjectURL(productImageBlob);
             this.appendChild(thumb);
