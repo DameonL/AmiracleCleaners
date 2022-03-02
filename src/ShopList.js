@@ -5,14 +5,14 @@ class ShopList extends HTMLElement {
         this.loadShopPage();
     }
 
-    let loadProductThumb = async () => {
+    async loadProductThumb() {
         let thumbContainer = document.createElement("div");
         let thumbHtml = await fetch("./pages/fragments/productThumb.html");
         thumbContainer.innerHTML = await thumbHtml.text();
         return thumbContainer;
     }
 
-    let loadShopPage = async () => {
+    async loadShopPage() {
         let productThumbTemplate = await this.loadProductThumb();
         this.renderProductData(await this.getProductData(), productThumbTemplate);
     }
