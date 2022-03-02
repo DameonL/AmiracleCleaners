@@ -26,7 +26,7 @@ class ShopList extends HTMLElement {
         for (let product of this.#products) {
             let thumb = productThumbTemplate.cloneNode(true);
             thumb.querySelector(`[boundField="Name"]`).innerText = product.Name;
-            thumb.querySelector(`[boundField="Image"]`).src = `https://amiracleproducts-c9c9.restdb.io/media/${product.Image}?s=t`;
+            thumb.querySelector(`[boundField="Image"]`).src = `/AmiracleCleaners/img/products/${product.Image}.jpg`;
             this.appendChild(thumb);
         }
     }
