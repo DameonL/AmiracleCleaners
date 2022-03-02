@@ -17,21 +17,11 @@ class ShopList extends HTMLElement {
         this.renderProductData(await this.getProductData(), productThumbTemplate);
     }
 
-    async renderProductData(productData, productThumbTemplate) {
+    renderProductData(productData, productThumbTemplate) {
         for (let product of productData) {
             let thumb = productThumbTemplate.cloneNode(true);
             thumb.querySelector(`[boundField="Name"]`).innerText = product.Name;
-            let productImageElement = thumb.querySelector(`[boundField="Image"]`);
-            let response = await fetch(`https://amiracleproducts-c9c9.restdb.io/media/${product.Image}?s=t`, {
-                headers: new Headers({
-                    'x-apikey': '621ea73934fd621565858acc', 
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    "Access-Control-Allow-Origin": "*"
-                }),
-                mode: "no-cors"
-            });
-            let productImageBlob = await response.blob();
-            productImageElement.src = URL.createObjectURL(productImageBlob);
+            thumb.querySelector(`[boundField="Image"]`).src = `https://amiracleproducts-c9c9.restdb.io/media/${product.Image}?s=t`;
             this.appendChild(thumb);
         }
     }
