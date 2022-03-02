@@ -1,4 +1,6 @@
 class ShopList extends HTMLElement {
+    #products = null;
+    #productSizes = null;
 
     constructor() {
         super();
@@ -14,11 +16,14 @@ class ShopList extends HTMLElement {
 
     async loadShopPage() {
         let productThumbTemplate = await this.loadProductThumb();
-        this.renderProductData(await this.getProductData(), productThumbTemplate);
+        this.#products = await this.getProductData();
+        this.#productSizes = await this.getProductSizesData();
+        console.log(this);
+        this.renderProductData(productThumbTemplate);
     }
 
-    renderProductData(productData, productThumbTemplate) {
-        for (let product of productData) {
+    renderProductData(productThumbTemplate) {
+        for (let product of this.#products) {
             let thumb = productThumbTemplate.cloneNode(true);
             thumb.querySelector(`[boundField="Name"]`).innerText = product.Name;
             thumb.querySelector(`[boundField="Image"]`).src = `https://amiracleproducts-c9c9.restdb.io/media/${product.Image}?s=t`;
@@ -34,20 +39,18 @@ class ShopList extends HTMLElement {
             }),
         });
 
-        let products = await data.json();
-        for (let product of products) {
-            let sizes = await fetch("https://amiracleproducts-c9c9.restdb.io/rest/products/" + product._id + "/Sizes", {
-                headers: new Headers({
-                        'x-apikey': '621ea73934fd621565858acc', 
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                }),
-            });
+        return await data.json();
+    }
+    
+    async getProductSizesData() {
+        let data = await fetch("https://amiracleproducts-c9c9.restdb.io/rest/product-sizes", {
+            headers: new Headers({
+                    'x-apikey': '621ea73934fd621565858acc', 
+                    'Content-Type': 'application/x-www-form-urlencoded'
+            }),
+        });
 
-            sizes = await sizes.json();
-            product.sizes = sizes;
-        }
-
-        return products;
+        return await data.json();
     }
     
 }
