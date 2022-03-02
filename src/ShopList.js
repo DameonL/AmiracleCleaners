@@ -7,7 +7,7 @@ class ShopList extends HTMLElement {
 
     async loadProductThumb() {
         let thumbContainer = document.createElement("div");
-        let thumbHtml = await fetch("/pages/fragments/productThumb.html");
+        let thumbHtml = await fetch("/AmiracleCleaners/pages/fragments/productThumb.html");
         thumbContainer.innerHTML = await thumbHtml.text();
         return thumbContainer;
     }
