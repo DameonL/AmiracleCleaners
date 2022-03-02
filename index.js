@@ -1,7 +1,7 @@
 let loadNavbar = async () => {
     let navbarTarget = document.querySelector("#navbarRender");
     let navbarHtml = await fetch("./pages/fragments/navbar.html");
-    navbarTarget.innerHTML = navbarHtml.text();
+    navbarTarget.innerHTML = await navbarHtml.text();
 }
 
 
