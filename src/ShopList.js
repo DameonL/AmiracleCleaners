@@ -48,6 +48,7 @@ class ShopList extends HTMLElement {
                     'x-apikey': '621ea73934fd621565858acc', 
                     'Content-Type': 'application/x-www-form-urlencoded'
             }),
+            mode: 'no-cors'
         });
 
         return await data.json();
