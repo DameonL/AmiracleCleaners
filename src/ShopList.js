@@ -34,7 +34,7 @@ class ShopList extends HTMLElement {
         });
 
         let products = await data.json();
-        for (let product in json) {
+        for (let product in products) {
             let sizes = await fetch("https://amiracleproducts-c9c9.restdb.io/rest/products/" + json._id + "/Sizes", {
                 headers: new Headers({
                         'x-apikey': '621ea73934fd621565858acc', 
