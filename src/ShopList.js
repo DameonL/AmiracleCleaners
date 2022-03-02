@@ -32,7 +32,18 @@ class ShopList extends HTMLElement {
                     'Content-Type': 'application/x-www-form-urlencoded'
             }),
         });
-        return await data.json();
+
+        let json = await data.json();
+        let sizes = await fetch("https://amiracleproducts-c9c9.restdb.io/rest/products/" + json._id + "/Sizes", {
+            headers: new Headers({
+                    'x-apikey': '621ea73934fd621565858acc', 
+                    'Content-Type': 'application/x-www-form-urlencoded'
+            }),
+        });
+
+        json.sizes = await sizes.json();
+
+        return json;
     }
     
 }
