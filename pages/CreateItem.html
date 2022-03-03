@@ -11,7 +11,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/AmiracleCleaners/styles/amiracle.css">
+    <link rel="stylesheet" href="../styles/amiracle.css">
 </head>
 
 <body>
@@ -19,20 +19,20 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <shop-list></shop-list>
-    <script src="/AmiracleCleaners/src/fragments/navbar.js" async defer></script>
-    <script src="/AmiracleCleaners/src/CreateItem.js" type="module" async defer></script>
+    <script src="../src/fragments/navbar.js" async defer></script>
+    <script src="../src/CreateItem.js" type="module" async defer></script>
     <label for="itemName">Name:</label><input type="text" boundField="Name" id="itemName">
     <label for="itemDescription">Description:</label><textarea boundField="Description" id="itemDescription"></textarea>
     <label for="itemImage">Image:</label><input type="text" boundField="Image" id="itemImage">
     <div>
         Variation 1:
-        <label for="itemVar1Description">Description:</label><input type="text" boundField="variant.description" id="itemVar1Description">
-        <label for="itemVar1Price">Description:</label><input type="number" boundField="variant.price" id="itemVar1Price">
+        <label for="itemVar1Description">Description:</label><input type="text" boundField="variants.description" id="itemVar1Description">
+        <label for="itemVar1Price">Price:</label><input type="number" boundField="variants.price" id="itemVar1Price">
     </div>
     <div>
         Variation 2:
-        <label for="itemVar2Description">Description:</label><input type="text" boundField="variant.description" id="itemVar2Description">
-        <label for="itemVar2Price">Price:</label><input type="number" boundField="variant.price" id="itemVar2Price">
+        <label for="itemVar2Description">Description:</label><input type="text" boundField="variants.description" id="itemVar2Description">
+        <label for="itemVar2Price">Price:</label><input type="number" boundField="variants.price" id="itemVar2Price">
     </div>
     <button id="createButton">Create</button>
 </body>

@@ -9,7 +9,7 @@ class ShopList extends HTMLElement {
 
     async loadProductThumb() {
         let thumbContainer = document.createElement("div");
-        let thumbHtml = await fetch("/AmiracleCleaners/pages/fragments/productThumb.html");
+        let thumbHtml = await fetch("../pages/fragments/productThumb.html");
         thumbContainer.innerHTML = await thumbHtml.text();
         return thumbContainer;
     }
@@ -25,7 +25,7 @@ class ShopList extends HTMLElement {
         for (let product of this.#products) {
             let thumb = productThumbTemplate.cloneNode(true);
             thumb.querySelector(`[boundField="Name"]`).innerText = product.fields.Name.stringValue;
-            thumb.querySelector(`[boundField="Image"]`).src = `/AmiracleCleaners/img/products/${product.Image.stringValue}.jpg`;
+            thumb.querySelector(`[boundField="Image"]`).src = `../img/products/${product.fields.Image.stringValue}.jpg`;
             this.appendChild(thumb);
         }
     }
