@@ -5,7 +5,7 @@ function processFields(startElement) {
     let boundFields = document.querySelectorAll("[boundField]");
 
     for (let field in boundFields) {
-        if getParentField(field) continue;
+        if (getParentField(field)) continue;
 
         let fieldName = field.getAttribute("boundField");
         let fieldType = field.getAttribute("fieldType");
