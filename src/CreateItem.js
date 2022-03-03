@@ -6,13 +6,16 @@ document.querySelector("#createButton").addEventListener("click", () => {
     let textFields = document.querySelectorAll(`input[type="text"]`);
     for (let textField of textFields) {
         let boundField = textField.getAttribute("boundField");
-        newItem[boundField] = { stringValue: boundField.value };
+        if (boundField.includes(".")) {
+            let fieldPath = boundField.split(".");
+        }
+        newItem.fields[boundField] = { stringValue: boundField.value };
     }
 
     let numberFields = document.querySelectorAll(`input[type="number"]`);
     for (let numberField of numberFields) {
         let boundField = numberField.getAttribute("boundField");
-        newItem[boundField] = { doubleValue: boundField.valueAsNumber };
+        newItem.fields[boundField] = { doubleValue: boundField.valueAsNumber };
     }
 
     console.log(newItem);
