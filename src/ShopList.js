@@ -32,8 +32,8 @@ class ShopList extends HTMLElement {
     
     async getProductData() {
         let data = await fetch("https://firestore.googleapis.com/v1/projects/amiracle-cleaners/databases/(default)/documents/products");
-        data = data.documents;
-        return await data.json();
+        data = await data.json();
+        return data.documents;
     }
     
     
