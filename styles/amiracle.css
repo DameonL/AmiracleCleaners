@@ -5,3 +5,8 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
+
+.thumbnail {
+    width: 100px;
+    height: 100px;
+}
