@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/AmiracleCleaners/styles/amiracle.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <shop-list></shop-list>
+    <script src="/AmiracleCleaners/src/fragments/navbar.js" async defer></script>
+    <script src="/AmiracleCleaners/src/CreateItem.js" type="module" async defer></script>
+    <label for="itemName">Name:</label><input type="text" boundField="Name" id="itemName">
+    <label for="itemDescription">Description:</label><textarea boundField="Description" id="itemDescription"></textarea>
+    <label for="itemImage">Image:</label><input type="text" boundField="Image" id="itemImage">
+    <div>
+        Variation 1:
+        <label for="itemVar1Description">Description:</label><input type="text" boundField="variant.description" id="itemVar1Description">
+        <label for="itemVar1Price">Description:</label><input type="number" boundField="variant.price" id="itemVar1Price">
+    </div>
+    <div>
+        Variation 2:
+        <label for="itemVar2Description">Description:</label><input type="text" boundField="variant.description" id="itemVar2Description">
+        <label for="itemVar2Price">Description:</label><input type="number" boundField="variant.price" id="itemVar2Price">
+    </div>
+    <button id="createButton">Create</button>
+</body>
+
+</html>
