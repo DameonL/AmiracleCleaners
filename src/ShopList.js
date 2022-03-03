@@ -17,7 +17,6 @@ class ShopList extends HTMLElement {
     async loadShopPage() {
         let productThumbTemplate = await this.loadProductThumb();
         this.#products = await this.getProductData();
-//        this.#productSizes = await this.getProductSizesData();
         console.log(this);
         this.renderProductData(productThumbTemplate);
     }
@@ -25,34 +24,18 @@ class ShopList extends HTMLElement {
     renderProductData(productThumbTemplate) {
         for (let product of this.#products) {
             let thumb = productThumbTemplate.cloneNode(true);
-            thumb.querySelector(`[boundField="Name"]`).innerText = product.Name;
-            thumb.querySelector(`[boundField="Image"]`).src = `/AmiracleCleaners/img/products/${product.Image}.jpg`;
+            thumb.querySelector(`[boundField="Name"]`).innerText = product.fields.Name.stringValue;
+//            thumb.querySelector(`[boundField="Image"]`).src = `/AmiracleCleaners/img/products/${product.Image}.jpg`;
             this.appendChild(thumb);
         }
     }
     
     async getProductData() {
-        let data = await fetch("https://amiracleproducts-c9c9.restdb.io/rest/products", {
-            headers: new Headers({
-                    'x-apikey': '621ea73934fd621565858acc', 
-                    'Content-Type': 'application/x-www-form-urlencoded'
-            }),
-        });
-
+        let data = await fetch("https://firestore.googleapis.com/v1/projects/amiracle-cleaners/databases/(default)/documents/products");
+        let data = data.documents;
         return await data.json();
     }
     
-    async getProductSizesData() {
-        let data = await fetch("https://amiracleproducts-c9c9.restdb.io/rest/product-sizes", {
-            headers: new Headers({
-                    'x-apikey': '621ea73934fd621565858acc', 
-                    'Content-Type': 'application/x-www-form-urlencoded'
-            }),
-            mode: 'no-cors'
-        });
-
-        return await data.json();
-    }
     
 }
 
