@@ -21,19 +21,33 @@
     <shop-list></shop-list>
     <script src="../src/fragments/navbar.js" async defer></script>
     <script src="../src/CreateItem.js" type="module" async defer></script>
-    <label for="itemName">Name:</label><input type="text" boundField="Name" id="itemName" fieldType="stringValue">
-    <label for="itemDescription">Description:</label><textarea boundField="Description" id="itemDescription" fieldType="stringValue"></textarea>
-    <label for="itemImage">Image:</label><input type="text" boundField="Image" id="itemImage" fieldType="stringValue">
-    <div boundField="variants" fieldType="arrayValue">
-        <div boundField="values" fieldType="mapValue">
-            Variation 1:
-            <label for="itemVar1Description">Description:</label><input type="text" boundField="description" fieldType="stringValue" id="itemVar1Description">
-            <label for="itemVar1Price">Price:</label><input type="number" boundField="price" fieldType="doubleValue" id="itemVar1Price">
+    <div fieldType="document">
+        <div>Name:<input type="text" boundField="name" fieldType="stringValue"></div>
+        <div>
+            <div>Description:</div>
+            <textarea boundField="description" cols="80" rows="40" fieldType="stringValue"></textarea>
         </div>
-        <div boundField="values" fieldType="mapValue">
-            Variation 2:
-            <label for="itemVar2Description">Description:</label><input type="text" boundField="description" id="itemVar2Description">
-            <label for="itemVar2Price">Price:</label><input type="number" boundField="price" fieldType="doubleValue" id="itemVar2Price">
+        <div boundField="variants" fieldType="arrayValue">
+            <div boundField="values" fieldType="mapValue">
+                Variation 1:
+                <div>
+                    Name:
+                    <input type="text" boundField="name" fieldType="stringValue">
+                </div>
+                <div>
+                    Description:
+                    <input type="text" boundField="description" fieldType="stringValue">
+                </div>
+                <div>
+                    Image:
+                    <input type="text" boundField="image" fieldType="stringValue">
+                </div>
+                <div>
+                    Price:
+                    <input type="number" boundField="price" fieldType="doubleValue">
+                </div>
+            </div>
+
         </div>
     </div>
     <button id="createButton">Create</button>

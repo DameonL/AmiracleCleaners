@@ -4,28 +4,38 @@ class ShopList extends HTMLElement {
 
     constructor() {
         super();
+
+        window.addEventListener("hashchange", this.#hashChanged);
         this.loadShopPage();
+        this.#hashChanged();
     }
 
-    async loadProductThumb() {
-        let thumbContainer = document.createElement("div");
-        let thumbHtml = await fetch("../pages/fragments/productThumb.html");
-        thumbContainer.innerHTML = await thumbHtml.text();
-        return thumbContainer;
+    #hashChanged = () => {
+        let params = new URLSearchParams(window.location.hash.substring(1));
+        if (!params.has("product")) {
+            this.style.display = "";
+        } else {
+            this.style.display = "none";
+        }
     }
 
     async loadShopPage() {
-        let productThumbTemplate = await this.loadProductThumb();
+        let productThumbTemplate = document.querySelector("#productThumb").content.firstElementChild;
         this.#products = await this.getProductData();
-        console.log(this);
         this.renderProductData(productThumbTemplate);
     }
 
     renderProductData(productThumbTemplate) {
         for (let product of this.#products) {
             let thumb = productThumbTemplate.cloneNode(true);
-            thumb.querySelector(`[boundField="Name"]`).innerText = product.fields.Name.stringValue;
-            thumb.querySelector(`[boundField="Image"]`).src = `../img/products/${product.fields.Image.stringValue}.jpg`;
+            thumb.querySelector(`[boundField="name"]`).innerText = product.fields.name.stringValue;
+            thumb.querySelector(`[boundField="image"]`).src = `../img/products/${product.fields.variants.arrayValue.values[0].mapValue.fields.image.stringValue}.jpg`;
+            thumb.querySelector(`[boundField="image"]`).addEventListener("click", () => {
+                let params = new URLSearchParams(window.location.hash.substring(1));
+                let productId = product.name.match(/\w*$/);
+                params.append("product", productId);
+                window.location.hash = params.toString();
+            })
             this.appendChild(thumb);
         }
     }
@@ -35,7 +45,6 @@ class ShopList extends HTMLElement {
         data = await data.json();
         return data.documents;
     }
-    
     
 }
 

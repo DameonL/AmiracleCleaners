@@ -2,10 +2,11 @@ function processFields(startElement) {
     let newItem = {};
     newItem.fields = {};
 
-    let boundFields = document.querySelectorAll("[boundField]");
+    let boundFields = startElement.querySelectorAll("[boundField]");
 
-    for (let field in boundFields) {
-        if (getParentField(field)) continue;
+    for (let field of boundFields) {
+        let parentField = getParentField(field);
+        if (parentField != startElement) continue;
 
         let fieldName = field.getAttribute("boundField");
         let fieldType = field.getAttribute("fieldType");
@@ -16,16 +17,20 @@ function processFields(startElement) {
     return newItem;
 }
 
-function getParentField = (field) => {
+function getParentField(field) {
     let currentElement = field;
+    let parentFieldTypes = [
+        "document",
+        "arrayValue",
+        "mapValue"
+    ]
     while (currentElement) {
-        currentElement = parentElement;
+        currentElement = currentElement.parentElement;
 
         if (!currentElement) break;
 
         let fieldType = currentElement.getAttribute("fieldType");
-        if ((fieldType === "arrayValue") || (fieldType === "mapValue"))
-            return currentElement;
+        if (parentFieldTypes.includes(fieldType)) return currentElement;
     }
 
     return null;
@@ -46,22 +51,35 @@ let fieldTypeHandlers = {
         let output = {};
         output.arrayValue = {};
         output.arrayValue.values = [];
-        let childElements = field.querySelectorAll(`[boundField="value"]`);
+        let childElements = field.querySelectorAll(`[boundField]`);
         for (let child of childElements) {
             if (getParentField(child) != field) continue;
-            output.arrayValue.values.add(processFields(child));
+            let newValue = {};
+            newValue[child.getAttribute("fieldType")] = processFields(child);
+            output.arrayValue.values.push(newValue);
         }
 
         return output;
-    }
+    },
     "mapValue" : (field) => {
-        let output = processFields(field);
+        let output = {}
+        output.mapValue = processFields(field);
+        console.log(output);
         return output;
     }
 }
 
 document.querySelector("#createButton").addEventListener("click", () => {
-    let serializedItem = processFields(document);
+    let serializedItem = processFields(document.querySelector(`[fieldType="document"]`));
 
-    console.log(serializedItem);
+    var request = new XMLHttpRequest();
+    var url = "https://firestore.googleapis.com/v1/projects/amiracle-cleaners/databases/(default)/documents/products";
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-Type", "application/json");
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            location.reload();
+        }
+    };
+    request.send(JSON.stringify(serializedItem));
 });
