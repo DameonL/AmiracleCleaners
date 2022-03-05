@@ -13,8 +13,8 @@ let shopName = document.head.querySelector("title").innerText;
 window.addEventListener("hashchange", hashChanged);
 window.addEventListener("popstate", hashChanged);
 let pageIds = {
-    "" : "pages/index.html",
-    "shop" : "pages/shop.html"
+    "" : "./pages/index.html",
+    "shop" : "./pages/shop.html"
 }
 
 function hashChanged() {
