@@ -5,7 +5,7 @@ class AmiracleNavbar extends HTMLElement {
     }
 
     async #loadNavbar() {
-        let navbarHtml = await fetch("../pages/AmiracleNavbar.html");
+        let navbarHtml = await fetch("./pages/AmiracleNavbar.html");
         this.innerHTML = await navbarHtml.text();
     }
 }
