@@ -29,7 +29,7 @@ class ShopList extends HTMLElement {
         for (let product of this.#products) {
             let thumb = productThumbTemplate.cloneNode(true);
             thumb.querySelector(`[boundField="name"]`).innerText = product.fields.name.stringValue;
-            thumb.querySelector(`[boundField="image"]`).src = `../img/products/${product.fields.variants.arrayValue.values[0].mapValue.fields.image.stringValue}.jpg`;
+            thumb.querySelector(`[boundField="image"]`).src = `./img/products/${product.fields.variants.arrayValue.values[0].mapValue.fields.image.stringValue}.jpg`;
             thumb.querySelector(`[boundField="image"]`).addEventListener("click", () => {
                 let params = new URLSearchParams(window.location.hash.substring(1));
                 let productId = product.name.match(/\w*$/);
