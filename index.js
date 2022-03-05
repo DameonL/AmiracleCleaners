@@ -1,7 +1,7 @@
-import AmiracleNavbar from "src/AmiracleNavbar.js";
-import ShopList from "src/ShopList.js";
-import ProductView from "src/ProductView.js";
-import ShoppingCart from "src/ShoppingCart.js";
+import AmiracleNavbar from "./src/AmiracleNavbar.js";
+import ShopList from "./src/ShopList.js";
+import ProductView from "./src/ProductView.js";
+import ShoppingCart from "./src/ShoppingCart.js";
 customElements.define('shop-list', ShopList);
 customElements.define('product-view', ProductView);
 customElements.define('shopping-cart', ShoppingCart);
