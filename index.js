@@ -1,11 +1,17 @@
+import AmiracleNavbar from "../src/AmiracleNavbar.js";
 import ShopList from "../src/ShopList.js";
 import ProductView from "../src/ProductView.js";
-let pageRenderer = document.querySelector("#pageRenderer");
-
+import ShoppingCart from "./src/ShoppingCart.js";
 customElements.define('shop-list', ShopList);
 customElements.define('product-view', ProductView);
+customElements.define('shopping-cart', ShoppingCart);
+customElements.define('amiracle-navbar', AmiracleNavbar);
+
+let pageRenderer = document.querySelector("#pageRenderer");
+let shopName = document.head.querySelector("title").innerText;
 
 window.addEventListener("hashchange", hashChanged);
+window.addEventListener("popstate", hashChanged);
 let pageIds = {
     "" : "pages/index.html",
     "shop" : "pages/shop.html"
@@ -21,10 +27,21 @@ function hashChanged() {
 }
 
 let loadPage = async (pageId = "") => {
-    let url = pageIds[pageId];
+    let url = "";
+    if (!(pageId in pageIds)) {
+        url = "pages/404.html";
+    } else {
+        url = pageIds[pageId];
+    }
+
     let navbarTarget = document.createElement("div");
     let pageHtml = await fetch(url);
     pageRenderer.innerHTML = await pageHtml.text();
+    if (pageRenderer.querySelector("title")) {
+        document.title = `${shopName} - ${pageRenderer.querySelector("title").innerText}`;
+    } else {
+        document.title = shopName;
+    }
 }
 
 hashChanged();

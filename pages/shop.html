@@ -1,17 +1,11 @@
+<title>Shop</title>
 <div>
     <shop-list></shop-list>
     <product-view></product-view>
     <template id="productThumb">
-        <div>
+        <div class="shopProductThumb">
             <div boundField="name"></div>
             <img boundField="image" class="thumbnail" style="cursor:pointer">
-        </div>
-    </template>
-    <template id="productView">
-        <div>
-            <div boundField="name"></div>
-            <img boundField="image">
-            <div boundField="description"></div>
         </div>
     </template>
 </div>

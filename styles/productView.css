@@ -1,0 +1,37 @@
+product-view {
+    padding: 5px 5px 5px 5px;
+}
+
+product-view > [boundField="name"] {
+    text-align: center;
+    font-size: 2em;
+}
+
+.productDetails {
+    display: flex;
+    column-gap: 5px;
+}
+
+.productImage {
+    overflow: hidden;
+    width: 20%;
+    border-radius: 50px;
+}
+
+product-view > .productDetails > .productImage > [boundField="image"] {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+product-view > [boundField="description"] {
+    padding: 10px 10px 10px 10px;
+}
+
+product-view > .productDetails > .rightMenu > [boundField="price"] {
+    text-align: center;
+}
+
+.rightMenu {
+    display: flex;
+    flex-direction: column;
+}
